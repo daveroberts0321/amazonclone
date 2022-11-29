@@ -99,7 +99,7 @@ button:disabled {
   flex: 1 1; }
   .navbar__logo img {
     width: 6rem;
-    height: 1.8rem; }
+    height: 6rem; }
 
 .navbar__search {
   width: 100%;

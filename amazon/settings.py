@@ -1,21 +1,42 @@
 from pathlib import Path
 import os
+import environ
 import django_heroku
+
+#https://django-environ.readthedocs.io/en/latest/quickstart.html
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+#DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['amazondjangoclone.herokuapp.com']
+ALLOWED_HOSTS = [
+    '127.0.0.1',#development 
+    'ar1580jig.herokuapp.com',#heroku starter
+    ]
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 
 INSTALLED_APPS = [
